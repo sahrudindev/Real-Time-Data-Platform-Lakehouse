@@ -1,8 +1,6 @@
 # Enterprise Data Platform
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
-![Python](https://img.shields.io/badge/python-3.10+-green.svg)
+
 
 A production-ready, enterprise-grade **Real-Time Data Platform** with Lakehouse architecture, Data Governance, and ML-ready capabilities.
 
