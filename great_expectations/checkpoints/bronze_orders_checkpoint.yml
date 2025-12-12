@@ -1,0 +1,22 @@
+name: bronze_orders_checkpoint
+config_version: 1
+class_name: Checkpoint
+run_name_template: "%Y%m%d-%H%M%S-bronze-orders"
+validations:
+  - batch_request:
+      datasource_name: delta_lake_bronze
+      data_connector_name: default_runtime_data_connector
+      data_asset_name: orders
+      batch_identifiers:
+        default_identifier_name: bronze_orders_batch
+    expectation_suite_name: bronze_orders_suite
+action_list:
+  - name: store_validation_result
+    action:
+      class_name: StoreValidationResultAction
+  - name: store_evaluation_params
+    action:
+      class_name: StoreEvaluationParametersAction
+  - name: update_data_docs
+    action:
+      class_name: UpdateDataDocsAction

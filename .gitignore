@@ -1,0 +1,82 @@
+# =============================================================================
+# ENTERPRISE DATA PLATFORM - GITIGNORE
+# =============================================================================
+
+# ===================
+# Node.js / Website
+# ===================
+node_modules/
+.next/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+
+# ===================
+# Python
+# ===================
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.Python
+
+# ===================
+# Docker
+# ===================
+*.log
+
+# ===================
+# IDE
+# ===================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# ===================
+# Data & Volumes
+# ===================
+data/
+*.parquet
+*.delta/
+checkpoints/
+
+# ===================
+# Secrets
+# ===================
+.env.local
+.env.*.local
+secrets/
+*.pem
+*.key
+
+# ===================
+# Build Outputs
+# ===================
+dist/
+build/
+target/
+out/
+
+# ===================
+# Airflow
+# ===================
+airflow/logs/
+airflow/plugins/
+
+# ===================
+# Great Expectations
+# ===================
+great_expectations/uncommitted/
+
+# ===================
+# Jupyter
+# ===================
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/

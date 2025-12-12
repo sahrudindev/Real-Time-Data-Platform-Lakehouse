@@ -1,0 +1,124 @@
+{
+  "topics": [
+    {
+      "name": "raw.ecommerce.orders",
+      "partitions": 6,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "delete",
+        "compression.type": "lz4",
+        "max.message.bytes": 10485760
+      },
+      "description": "Raw order events from e-commerce platform"
+    },
+    {
+      "name": "raw.ecommerce.customers",
+      "partitions": 3,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "compact",
+        "compression.type": "lz4",
+        "max.message.bytes": 10485760
+      },
+      "description": "Customer profile events and updates"
+    },
+    {
+      "name": "raw.ecommerce.products",
+      "partitions": 3,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "compact",
+        "compression.type": "lz4",
+        "max.message.bytes": 10485760
+      },
+      "description": "Product catalog events"
+    },
+    {
+      "name": "raw.ecommerce.clickstream",
+      "partitions": 12,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 259200000,
+        "cleanup.policy": "delete",
+        "compression.type": "snappy",
+        "max.message.bytes": 1048576
+      },
+      "description": "User clickstream and page view events"
+    },
+    {
+      "name": "raw.ecommerce.inventory",
+      "partitions": 3,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "compact",
+        "compression.type": "lz4",
+        "max.message.bytes": 10485760
+      },
+      "description": "Inventory level updates"
+    },
+    {
+      "name": "raw.ecommerce.payments",
+      "partitions": 6,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 2592000000,
+        "cleanup.policy": "delete",
+        "compression.type": "lz4",
+        "max.message.bytes": 10485760
+      },
+      "description": "Payment transaction events"
+    },
+    {
+      "name": "processed.orders.enriched",
+      "partitions": 6,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "delete",
+        "compression.type": "lz4"
+      },
+      "description": "Enriched order events with customer and product data"
+    },
+    {
+      "name": "processed.analytics.realtime",
+      "partitions": 3,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 86400000,
+        "cleanup.policy": "delete",
+        "compression.type": "lz4"
+      },
+      "description": "Real-time analytics aggregations"
+    },
+    {
+      "name": "alerts.data-quality",
+      "partitions": 1,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 604800000,
+        "cleanup.policy": "delete"
+      },
+      "description": "Data quality alert events"
+    },
+    {
+      "name": "dlq.processing-errors",
+      "partitions": 3,
+      "replication_factor": 1,
+      "config": {
+        "retention.ms": 2592000000,
+        "cleanup.policy": "delete"
+      },
+      "description": "Dead letter queue for processing errors"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "environment": "development",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+}

@@ -1,0 +1,147 @@
+{
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 0
+                            }
+                        ]
+                    }
+                }
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none"
+            },
+            "title": "Services Up",
+            "type": "stat",
+            "targets": [
+                {
+                    "expr": "count(up == 1)",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 6,
+                "y": 0
+            },
+            "id": 2,
+            "title": "API Requests/sec",
+            "type": "stat",
+            "targets": [
+                {
+                    "expr": "rate(http_requests_total[5m])",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 12,
+                "y": 0
+            },
+            "id": 3,
+            "title": "Error Rate",
+            "type": "stat",
+            "targets": [
+                {
+                    "expr": "rate(http_requests_total{status=~'5..'}[5m])",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 18,
+                "y": 0
+            },
+            "id": 4,
+            "title": "Kafka Lag",
+            "type": "stat",
+            "targets": [
+                {
+                    "expr": "sum(kafka_consumer_lag)",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 4
+            },
+            "id": 5,
+            "title": "Request Latency",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 4
+            },
+            "id": 6,
+            "title": "Throughput",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "rate(http_requests_total[1m])",
+                    "refId": "A"
+                }
+            ]
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 38,
+    "title": "Enterprise Data Platform Overview",
+    "uid": "enterprise-overview",
+    "version": 1
+}

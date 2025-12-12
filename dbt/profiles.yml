@@ -1,0 +1,17 @@
+enterprise_data_platform:
+  target: dev
+  outputs:
+    dev:
+      type: spark
+      method: thrift
+      host: spark-master
+      port: 10000
+      schema: analytics
+      threads: 4
+    prod:
+      type: spark
+      method: thrift
+      host: spark-master
+      port: 10000
+      schema: analytics_prod
+      threads: 8

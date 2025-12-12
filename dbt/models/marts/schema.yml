@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: fct_daily_sales
+    description: "Daily sales fact table with aggregated metrics"
+    columns:
+      - name: order_date
+        description: "Date of orders"
+        tests:
+          - unique
+          - not_null
+      - name: total_orders
+        description: "Count of orders for the day"
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Total revenue for the day"
+        tests:
+          - not_null
+
+  - name: dim_customers
+    description: "Customer dimension with 360-degree view"
+    columns:
+      - name: customer_id
+        description: "Business customer ID"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Customer email"
+        tests:
+          - unique
+          - not_null
+      - name: customer_tier
+        description: "Customer value tier (platinum/gold/silver/bronze)"
+        tests:
+          - accepted_values:
+              values: ['platinum', 'gold', 'silver', 'bronze']
+
+  - name: dim_products
+    description: "Product dimension with performance metrics"
+    columns:
+      - name: product_id
+        description: "Business product ID"
+        tests:
+          - unique
+          - not_null
+      - name: product_tier
+        description: "Product performance tier"
+        tests:
+          - accepted_values:
+              values: ['star', 'performer', 'average', 'underperformer']

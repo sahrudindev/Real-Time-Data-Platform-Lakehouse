@@ -1,0 +1,47 @@
+groups:
+  - name: pipeline_alerts
+    rules:
+      - alert: PipelineDown
+        expr: up{job="api"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API service is down"
+          description: "The API service has been down for more than 5 minutes."
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "More than 10% of requests are failing."
+
+      - alert: KafkaConsumerLag
+        expr: kafka_consumer_lag > 10000
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kafka consumer lag is high"
+          description: "Consumer lag has been above 10000 for 15 minutes."
+
+      - alert: SparkJobFailed
+        expr: spark_job_status{status="FAILED"} > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Spark job failed"
+          description: "A Spark job has failed."
+
+      - alert: LowDiskSpace
+        expr: node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low disk space"
+          description: "Less than 10% disk space remaining."

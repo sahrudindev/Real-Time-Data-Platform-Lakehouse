@@ -1,0 +1,31 @@
+{{
+    config(
+        materialized='table'
+    )
+}}
+
+select
+    customer_sk,
+    customer_id,
+    email,
+    full_name,
+    first_name,
+    last_name,
+    phone,
+    city,
+    state,
+    country,
+    segment,
+    lifetime_value,
+    total_orders,
+    total_revenue,
+    avg_order_value,
+    first_order_date,
+    last_order_date,
+    total_items_purchased,
+    days_since_first_order,
+    days_since_last_order,
+    customer_tier,
+    customer_status,
+    _dbt_updated_at
+from {{ ref('int_customer_360') }}

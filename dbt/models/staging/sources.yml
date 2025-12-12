@@ -1,0 +1,75 @@
+version: 2
+
+sources:
+  - name: silver
+    description: "Silver layer Delta Lake tables"
+    schema: silver
+    tables:
+      - name: orders
+        description: "Cleansed orders from Silver layer"
+        columns:
+          - name: order_sk
+            description: "Surrogate key"
+          - name: order_id
+            description: "Business order ID"
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: "Customer ID"
+            tests:
+              - not_null
+          - name: total_amount
+            description: "Total order amount"
+            tests:
+              - not_null
+
+      - name: customers
+        description: "Cleansed customers from Silver layer"
+        columns:
+          - name: customer_sk
+            description: "Surrogate key"
+          - name: customer_id
+            description: "Business customer ID"
+            tests:
+              - unique
+              - not_null
+          - name: email
+            description: "Customer email"
+            tests:
+              - unique
+              - not_null
+
+      - name: products
+        description: "Cleansed products from Silver layer"
+        columns:
+          - name: product_sk
+            description: "Surrogate key"
+          - name: product_id
+            description: "Business product ID"
+            tests:
+              - unique
+              - not_null
+
+      - name: order_items
+        description: "Order line items"
+        columns:
+          - name: order_item_sk
+            description: "Surrogate key"
+            tests:
+              - unique
+              - not_null
+          - name: order_id
+            description: "Parent order ID"
+            tests:
+              - not_null
+
+      - name: clickstream
+        description: "User clickstream events"
+        columns:
+          - name: clickstream_sk
+            description: "Surrogate key"
+          - name: session_id
+            description: "Session ID"
+            tests:
+              - not_null
