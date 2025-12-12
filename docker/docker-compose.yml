@@ -5,7 +5,7 @@
 # Version: 1.0.0
 # =============================================================================
 
-version: '3.8'
+
 
 x-airflow-common: &airflow-common
   image: apache/airflow:2.7.3-python3.10
@@ -136,21 +136,13 @@ services:
   # SPARK MASTER
   # ===========================================================================
   spark-master:
-    image: bitnami/spark:3.5.0
+    image: apache/spark-py:v3.5.0
     container_name: spark-master
     hostname: spark-master
     ports:
       - "7077:7077"
       - "8082:8080"
-    environment:
-      SPARK_MODE: master
-      SPARK_MASTER_HOST: spark-master
-      SPARK_MASTER_PORT: 7077
-      SPARK_MASTER_WEBUI_PORT: 8080
-      SPARK_RPC_AUTHENTICATION_ENABLED: 'no'
-      SPARK_RPC_ENCRYPTION_ENABLED: 'no'
-      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: 'no'
-      SPARK_SSL_ENABLED: 'no'
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master -h spark-master
     volumes:
       - ../spark/jobs:/opt/spark/jobs
       - ../spark/jars:/opt/spark/jars
@@ -164,20 +156,15 @@ services:
   # SPARK WORKER 1
   # ===========================================================================
   spark-worker-1:
-    image: bitnami/spark:3.5.0
+    image: apache/spark-py:v3.5.0
     container_name: spark-worker-1
     hostname: spark-worker-1
     ports:
       - "8083:8081"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
     environment:
-      SPARK_MODE: worker
-      SPARK_MASTER_URL: spark://spark-master:7077
       SPARK_WORKER_CORES: 2
       SPARK_WORKER_MEMORY: 4g
-      SPARK_RPC_AUTHENTICATION_ENABLED: 'no'
-      SPARK_RPC_ENCRYPTION_ENABLED: 'no'
-      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: 'no'
-      SPARK_SSL_ENABLED: 'no'
     volumes:
       - ../spark/jobs:/opt/spark/jobs
       - ../spark/jars:/opt/spark/jars
@@ -193,20 +180,15 @@ services:
   # SPARK WORKER 2
   # ===========================================================================
   spark-worker-2:
-    image: bitnami/spark:3.5.0
+    image: apache/spark-py:v3.5.0
     container_name: spark-worker-2
     hostname: spark-worker-2
     ports:
       - "8084:8081"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
     environment:
-      SPARK_MODE: worker
-      SPARK_MASTER_URL: spark://spark-master:7077
       SPARK_WORKER_CORES: 2
       SPARK_WORKER_MEMORY: 4g
-      SPARK_RPC_AUTHENTICATION_ENABLED: 'no'
-      SPARK_RPC_ENCRYPTION_ENABLED: 'no'
-      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: 'no'
-      SPARK_SSL_ENABLED: 'no'
     volumes:
       - ../spark/jobs:/opt/spark/jobs
       - ../spark/jars:/opt/spark/jars

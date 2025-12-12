@@ -48,13 +48,23 @@ data/
 checkpoints/
 
 # ===================
-# Secrets
+# Secrets & Environment
 # ===================
+.env
+.env.*
+!.env.example
 .env.local
 .env.*.local
 secrets/
 *.pem
 *.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Docker .env (contains passwords)
+docker/.env
 
 # ===================
 # Build Outputs
