@@ -1,6 +1,6 @@
 # Enterprise Data Platform
 
-
+![Hero Section](/docs/images/hero_section.png)
 
 A production-ready, enterprise-grade **Real-Time Data Platform** with Lakehouse architecture, Data Governance, and ML-ready capabilities.
 
