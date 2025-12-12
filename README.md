@@ -31,16 +31,22 @@ A production-ready, enterprise-grade **Real-Time Data Platform** with Lakehouse 
 
 ## 🚀 Quick Start
 
+> **Note:** Untuk panduan lengkap instalasi di laptop baru, lihat [docs/USAGE_GUIDE.md](docs/USAGE_GUIDE.md).
+
 ```bash
 # Clone the repository
 git clone https://github.com/your-repo/enterprise-data-platform.git
 cd enterprise-data-platform
 
-# Start all services
-cd docker && docker-compose up -d
+# Setup Environment Credentials
+cd docker
+cp .env.example .env
+
+# Start all services (Stable Version)
+docker compose -f docker-compose-no-spark.yml up -d
 
 # Verify services are running
-docker-compose ps
+docker compose -f docker-compose-no-spark.yml ps
 ```
 
 ## 📦 Tech Stack
